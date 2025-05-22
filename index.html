@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caique Oliveira | Full Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- React CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#050505',
+                        secondary: '#FF10F0',
+                        accent: '#00F0FF',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    animation: {
+                        'gradient-x': 'gradient-x 8s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-reverse': 'float-reverse 5s ease-in-out infinite',
+                        'spin-slow': 'spin-slow 20s linear infinite',
+                        'move-x': 'move-x 15s linear infinite alternate',
+                        'move-y': 'move-y 12s linear infinite alternate',
+                        'move-diagonal': 'move-diagonal 18s linear infinite alternate',
+                    },
+                    keyframes: {
+                        'gradient-x': {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            }
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        },
+                        'float-reverse': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(15px)' }
+                        },
+                        'spin-slow': {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' }
+                        },
+                        'move-x': {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(100vw)' }
+                        },
+                        'move-y': {
+                            '0%': { transform: 'translateY(0)' },
+                            '100%': { transform: 'translateY(100vh)' }
+                        },
+                        'move-diagonal': {
+                            '0%': { transform: 'translate(0, 0)' },
+                            '100%': { transform: 'translate(100vw, 100vh)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap');
+        
+        body {
+            background-color: #050505;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #FF10F0, #00F0FF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: gradient-x 8s ease infinite;
+        }
+        
+        .gradient-border {
+            position: relative;
+        }
+        
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 0.5rem;
+            padding: 2px;
+            background: linear-gradient(45deg, #FF10F0, #00F0FF);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        
+        .tech-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .tech-icon:hover {
+            transform: translateY(-5px);
+            filter: drop-shadow(0 0 8px currentColor);
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(90deg, #FF10F0, #00F0FF);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .blob {
+            position: absolute;
+            filter: blur(60px);
+            opacity: 0.2;
+            z-index: -1;
+            border-radius: 50%;
+        }
+        
+        .blob-1 {
+            background: #FF10F0;
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+        }
+        
+        .blob-2 {
+            background: #00F0FF;
+            width: 400px;
+            height: 400px;
+            bottom: 10%;
+            right: 10%;
+        }
+
+        .language-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: linear-gradient(45deg, #FF10F0, #00F0FF);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 16, 240, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .language-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .language-toggle i {
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Floating icons container */
+        .floating-icons-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        /* Animated tech icons */
+        .animated-tech-icon {
+            position: absolute;
+            opacity: 0.7;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+            transition: all 0.5s ease;
+            will-change: transform;
+        }
+
+        .animated-tech-icon:hover {
+            opacity: 1;
+            filter: drop-shadow(0 0 10px currentColor);
+            transform: scale(1.5) !important;
+            z-index: 10;
+        }
+
+        @keyframes random-move {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(50vw, 20vh) rotate(90deg);
+            }
+            50% {
+                transform: translate(30vw, 60vh) rotate(180deg);
+            }
+            75% {
+                transform: translate(70vw, 40vh) rotate(270deg);
+            }
+            100% {
+                transform: translate(10vw, 80vh) rotate(360deg);
+            }
+        }
+
+        .random-move {
+            animation: random-move 30s linear infinite;
+        }
+
+        .bounce {
+            animation: bounce 8s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            25% {
+                transform: translateY(-50px) translateX(20px);
+            }
+            50% {
+                transform: translateY(0) translateX(40px);
+            }
+            75% {
+                transform: translateY(-30px) translateX(60px);
+            }
+        }
+
+        /* Language toggle menu */
+        .language-menu {
+            position: absolute;
+            bottom: 60px;
+            right: 0;
+            background: rgba(5, 5, 5, 0.9);
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 16, 240, 0.2);
+            backdrop-filter: blur(10px);
+            transform: translateY(20px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .language-menu.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .language-option {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .language-option:hover {
+            background: rgba(255, 16, 240, 0.1);
+            color: #FF10F0;
+        }
+
+        .language-option i {
+            margin-right: 0.5rem;
+        }
+
+        .language-flag {
+            width: 20px;
+            height: 15px;
+            margin-right: 0.5rem;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    
+    <!-- Floating Icons Background (React Component) -->
+    <div id="floating-icons-root"></div>
+    
+    <!-- Language Toggle Button -->
+    <div class="language-toggle hover " id="languageToggle">
+        <i class="fas fa-language"></i>
+        <div class="language-menu" id="languageMenu">
+            <div class="language-option w-40" data-lang="pt">
+                <img src="https://flagcdn.com/w20/br.png" class="language-flag" alt="Brazil">
+                Português
+            </div>
+            <div class="language-option w-40" data-lang="en">
+                <img src="https://flagcdn.com/w20/us.png" class="language-flag" alt="USA">
+                English
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="text-2xl font-bold gradient-text">Caique Oliveira</div>
+        <div class="hidden md:flex space-x-8">
+            <a href="#about" class="nav-link text-white hover:text-secondary" data-pt="Sobre" data-en="About">Sobre</a>
+            <a href="#skills" class="nav-link text-white hover:text-accent" data-pt="Habilidades" data-en="Skills">Habilidades</a>
+            <a href="#contact" class="nav-link text-white hover:text-accent" data-pt="Contato" data-en="Contact">Contato</a>
+        </div>
+        <button class="md:hidden text-white">
+            <i class="fas fa-bars text-2xl"></i>
+        </button>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="container mx-auto px-6 py-20 md:py-32 flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-12 md:mb-0">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                <span data-pt="Olá, eu sou" data-en="Hi, I'm">Olá, eu sou</span> <span class="gradient-text">Caique Oliveira</span>
+            </h1>
+            <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-300" data-pt="Desenvolvedor Full Stack" data-en="Full Stack Developer">
+                Desenvolvedor Full Stack
+            </h2>
+            <p class="text-lg text-gray-400 mb-8 max-w-lg" data-pt="Especializado em construir aplicações web modernas e escaláveis com tecnologias como Node.js, React e AWS." 
+               data-en="Specialized in building modern and scalable web applications with technologies like Node.js, React, and AWS.">
+                Especializado em construir aplicações web modernas e escaláveis com tecnologias como Node.js, React e AWS.
+            </p>
+            <div class="flex space-x-4">
+                <a href="#contact" class="px-6 py-3 bg-gradient-to-r from-secondary to-accent text-white rounded-lg font-medium hover:opacity-90 transition" data-pt="Contate-me" data-en="Contact Me">
+                    Contate-me
+                </a>
+            </div>
+        </div>
+        <div class="md:w-1/2 flex justify-center">
+            <div class="relative w-64 h-64 md:w-80 md:h-80 gradient-border rounded-lg overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                     alt="Caique Oliveira" 
+                     class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="container mx-auto px-6 py-20">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+            <span class="gradient-text" data-pt="Sobre Mim" data-en="About Me">Sobre Mim</span>
+        </h2>
+        <div class="max-w-4xl mx-auto bg-gray-900 rounded-xl p-8 gradient-border">
+            <p class="text-lg text-gray-300 mb-6" data-pt="Sou um desenvolvedor Full Stack apaixonado por criar soluções tecnológicas inovadoras e eficientes. Com experiência em diversas tecnologias modernas, meu objetivo é entregar produtos de alta qualidade que resolvam problemas reais." 
+               data-en="I'm a passionate Full Stack Developer dedicated to creating innovative and efficient technological solutions. With experience in various modern technologies, my goal is to deliver high-quality products that solve real problems.">
+                Sou um desenvolvedor Full Stack apaixonado por criar soluções tecnológicas inovadoras e eficientes. Com experiência em diversas tecnologias modernas, meu objetivo é entregar produtos de alta qualidade que resolvam problemas reais.
+            </p>
+            <p class="text-lg text-gray-300 mb-6" data-pt="Minha jornada na programação começou a 2 anos, e desde então tenho me dedicado a aprender e dominar as melhores práticas de desenvolvimento. Acredito na combinação de código limpo, arquitetura sólida e experiência do usuário excepcional." 
+               data-en="My programming journey started 2 years ago, and since then I've been dedicated to learning and mastering development best practices. I believe in the combination of clean code, solid architecture, and exceptional user experience.">
+                Minha jornada na programação começou 2 anos, e desde então tenho me dedicado a aprender e dominar as melhores práticas de desenvolvimento. Acredito na combinação de código limpo, arquitetura sólida e experiência do usuário excepcional.
+            </p>
+            <p class="text-lg text-gray-300" data-pt="Quando não estou codando, você pode me encontrar explorando novas tecnologias, contribuindo para projetos open-source ou aproveitando um bom café enquanto estudo novas tendências do mercado." 
+               data-en="When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or enjoying a good coffee while studying new market trends.">
+                Quando não estou codando, você pode me encontrar explorando novas tecnologias, contribuindo para projetos open-source ou aproveitando um bom café enquanto estudo novas tendências do mercado.
+            </p>
+        </div>
+    </section>
+    
+    <!-- Skills Section -->
+    <section id="skills" class="container mx-auto px-6 py-20">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+            <span class="gradient-text" data-pt="Minhas Habilidades" data-en="My Skills">Minhas Habilidades</span>
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <!-- Frontend -->
+            <div class="bg-gray-900 rounded-xl p-6 gradient-border">
+                <h3 class="text-xl font-semibold mb-4 text-secondary flex items-center">
+                    <i class="fas fa-laptop-code mr-2"></i> <span data-pt="Frontend" data-en="Frontend">Frontend</span>
+                </h3>
+                <ul class="space-y-2">
+                    <li class="flex items-center">
+                        <i class="fab fa-react text-accent mr-2"></i>
+                        <span>React</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fab fa-css3-alt text-yellow-400 mr-2"></i>
+                        <span>CSS</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fab fa-css3-alt text-blue-500 mr-2"></i>
+                        <span>Tailwind CSS</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fab fa-html5 text-orange-500 mr-2"></i>
+                        <span>HTML5</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-fire text-orange-500 mr-2"></i>
+                        <span>Next.js</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Backend -->
+            <div class="bg-gray-900 rounded-xl p-6 gradient-border">
+                <h3 class="text-xl font-semibold mb-4 text-accent flex items-center">
+                    <i class="fas fa-server mr-2"></i> <span data-pt="Backend" data-en="Backend">Backend</span>
+                </h3>
+                <ul class="space-y-2">
+                    <li class="flex items-center">
+                        <i class="fab fa-node-js text-green-500 mr-2"></i>
+                        <span>Node.js</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-code text-blue-400 mr-2"></i>
+                        <span>TypeScript</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-shield-alt text-red-500 mr-2"></i>
+                        <span>Nest.js</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-database text-blue-400 mr-2"></i>
+                        <span>SQL</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fab fa-js text-yellow-400 mr-2"></i>
+                        <span>JavaScript</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Cloud & DevOps -->
+            <div class="bg-gray-900 rounded-xl p-6 gradient-border">
+                <h3 class="text-xl font-semibold mb-4 text-secondary flex items-center">
+                    <i class="fas fa-cloud mr-2"></i> <span data-pt="Cloud & DevOps" data-en="Cloud & DevOps">Cloud & DevOps</span>
+                </h3>
+                <ul class="space-y-2">
+                    <li class="flex items-center">
+                        <i class="fab fa-aws text-orange-400 mr-2"></i>
+                        <span>AWS</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fab fa-github text-gray-300 mr-2"></i>
+                        <span>GitHub</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="container mx-auto px-6 py-20">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+            <span class="gradient-text" data-pt="Vamos Conversar" data-en="Let's Talk">Vamos Conversar</span>
+        </h2>
+        <div class="max-w-4xl mx-auto bg-gray-900 rounded-xl p-8 gradient-border">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-secondary" data-pt="Informações de Contato" data-en="Contact Information">Informações de Contato</h3>
+                    <p class="text-gray-400 mb-6" data-pt="Estou disponível para oportunidades de trabalho e colaborações. Sinta-se à vontade para entrar em contato!" 
+                       data-en="I'm available for job opportunities and collaborations. Feel free to get in touch!">
+                        Estou disponível para oportunidades de trabalho e colaborações. Sinta-se à vontade para entrar em contato!
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-accent mr-4 text-xl"></i>
+                            <span>dev.caiquealves@gmail.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone text-secondary mr-4 text-xl"></i>
+                            <span>+55 (11) 99875-5337</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-linkedin text-accent mr-4 text-xl"></i>
+                            <span>www.linkedin.com/in/caique-oliveira-br</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-github text-secondary mr-4 text-xl"></i>
+                            <span>github.com/caiqueoliveira</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <form>
+                        <!-- <div class="mb-4">
+                            <label for="name" class="block text-gray-400 mb-2" data-pt="Nome" data-en="Name">Nome</label>
+                            <input type="text" id="name", class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary text-white">
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-400 mb-2" data-pt="Email" data-en="Email">Email</label>
+                            <input type="email" id="email", class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent text-white">
+                        </div>
+                        <div class="mb-4">
+                            <label for="message" class="block text-gray-400 mb-2" data-pt="Mensagem", data-en="Message">Mensagem</label>
+                            <textarea id="message" rows="4", class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary text-white"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3 bg-gradient-to-r from-secondary to-accent text-white rounded-lg font-medium hover:opacity-90 transition" data-pt="Enviar Mensagem" data-en="Send Message">
+                            Enviar Mensagem
+                        </button>
+                    </form> -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-2xl font-bold gradient-text mb-4 md:mb-0">Caique Oliveira</div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-secondary text-xl">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-accent text-xl">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-secondary text-xl">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-accent text-xl">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p data-pt="&copy; 2025 Caique Oliveira. Todos os direitos reservados." 
+                   data-en="&copy; 2025 Caique Oliveira. All rights reserved.">
+                    &copy; 2025 Caique Oliveira. Todos os direitos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- React Scripts -->
+    <script type="text/babel">
+        // Floating Tech Icons Component
+        const FloatingTechIcons = () => {
+            const techIcons = [
+                { icon: 'fab fa-react', color: '#00F0FF', size: 'text-3xl', animation: 'random-move' },
+                { icon: 'fab fa-node-js', color: '#68A063', size: 'text-4xl', animation: 'move-x' },
+                { icon: 'fab fa-js', color: '#F0DB4F', size: 'text-3xl', animation: 'move-y' },
+                { icon: 'fab fa-aws', color: '#FF9900', size: 'text-5xl', animation: 'move-diagonal' },
+                { icon: 'fab fa-docker', color: '#2496ED', size: 'text-4xl', animation: 'bounce' },
+                { icon: 'fab fa-git-alt', color: '#F05032', size: 'text-3xl', animation: 'random-move' },
+                { icon: 'fas fa-database', color: '#00F0FF', size: 'text-4xl', animation: 'move-x' },
+                { icon: 'fab fa-html5', color: '#E34F26', size: 'text-3xl', animation: 'move-y' },
+                { icon: 'fab fa-css3-alt', color: '#1572B6', size: 'text-4xl', animation: 'move-diagonal' },
+                { icon: 'fab fa-github', color: '#FFFFFF', size: 'text-3xl', animation: 'bounce' },
+                { icon: 'fas fa-code', color: '#007ACC', size: 'text-3xl', animation: 'random-move' },
+                { icon: 'fas fa-server', color: '#FF10F0', size: 'text-4xl', animation: 'move-x' }
+            ];
+            
+            // Generate random positions for icons
+            const getRandomPosition = () => ({
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animationDuration: `${15 + Math.random() * 20}s`,
+                animationDelay: `${Math.random() * 5}s`
+            });
+            
+            // Generate random movement patterns
+            const getRandomMovement = () => {
+                const patterns = ['random-move', 'move-x', 'move-y', 'move-diagonal', 'bounce'];
+                return patterns[Math.floor(Math.random() * patterns.length)];
+            };
+            
+            return (
+                <div className="floating-icons-container">
+                    {techIcons.map((tech, index) => {
+                        const position = getRandomPosition();
+                        const movement = getRandomMovement();
+                        
+                        return (
+                            <i 
+                                key={index}
+                                className={`${tech.icon} ${tech.size} animated-tech-icon ${movement}`}
+                                style={{
+                                    color: tech.color,
+                                    top: position.top,
+                                    left: position.left,
+                                    animationDuration: position.animationDuration,
+                                    animationDelay: position.animationDelay,
+                                    transform: `rotate(${Math.random() * 360}deg)`
+                                }}
+                            ></i>
+                        );
+                    })}
+                </div>
+            );
+        };
+        
+        // Render the React component
+        ReactDOM.render(<FloatingTechIcons />, document.getElementById('floating-icons-root'));
+    </script>
+    
+    <!-- Original Scripts -->
+    <script>
+        // Language toggle functionality
+        const languageToggle = document.getElementById('languageToggle');
+        const languageMenu = document.getElementById('languageMenu');
+        let currentLanguage = 'pt'; // Default language is Portuguese
+        
+        // Function to toggle language menu
+        function toggleLanguageMenu(e) {
+            e.stopPropagation(); // Prevent event from bubbling up
+            languageMenu.classList.toggle('active');
+        }
+        
+        // Function to set language
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            updateLanguage();
+            languageMenu.classList.remove('active');
+            
+            // Update active language indicator
+            document.querySelectorAll('.language-option').forEach(option => {
+                if (option.dataset.lang === lang) {
+                    option.classList.add('bg-gradient-to-r', 'from-secondary', 'to-accent', 'text-white');
+                } else {
+                    option.classList.remove('bg-gradient-to-r', 'from-secondary', 'to-accent', 'text-white');
+                }
+            });
+        }
+        
+        // Function to update all elements with data attributes
+        function updateLanguage() {
+            document.querySelectorAll('[data-pt], [data-en]').forEach(element => {
+                if (element.dataset.pt && element.dataset.en) {
+                    // For elements with both data-pt and data-en
+                    element.textContent = currentLanguage === 'pt' ? element.dataset.pt : element.dataset.en;
+                } else if (element.dataset.pt) {
+                    // For elements with only data-pt (like placeholders)
+                    element.setAttribute('placeholder', currentLanguage === 'pt' ? element.dataset.pt : element.dataset.en);
+                }
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = currentLanguage === 'pt' ? 'pt-BR' : 'en-US';
+            
+            // Update toggle button title
+            languageToggle.title = currentLanguage === 'pt' ? 'Switch to English' : 'Mudar para Português';
+        }
+        
+        // Initialize language toggle button
+        languageToggle.addEventListener('click', toggleLanguageMenu);
+        
+        // Initialize language options
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.stopPropagation();
+                setLanguage(option.dataset.lang);
+            });
+        });
+        
+        // Close language menu when clicking outside
+        document.addEventListener('click', () => {
+            languageMenu.classList.remove('active');
+        });
+        
+        // Prevent closing when clicking inside the menu
+        languageMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+        
+        // Initialize with Portuguese selected
+        setLanguage('pt');
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.md\\:hidden');
+        const mobileMenu = document.querySelector('.md\\:flex');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+            mobileMenu.classList.toggle('flex-col');
+            mobileMenu.classList.toggle('absolute');
+            mobileMenu.classList.toggle('top-16');
+            mobileMenu.classList.toggle('right-6');
+            mobileMenu.classList.toggle('bg-gray-900');
+            mobileMenu.classList.toggle('p-4');
+            mobileMenu.classList.toggle('rounded-lg');
+            mobileMenu.classList.toggle('shadow-lg');
+            mobileMenu.classList.toggle('space-y-4');
+            mobileMenu.classList.toggle('space-x-8');
+        });
+        
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeIn');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</html>
