@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <link rel="shortcut icon" type="imagex/png" href="./images/LogoPortifolio.ico">
     <meta charset="UTF-8">
@@ -76,14 +77,14 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap');
-        
+
         body {
             background-color: #050505;
             color: white;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
         }
-        
+
         .gradient-text {
             background: linear-gradient(90deg, #FF10F0, #00F0FF);
             -webkit-background-clip: text;
@@ -92,11 +93,11 @@
             background-size: 200% auto;
             animation: gradient-x 8s ease infinite;
         }
-        
+
         .gradient-border {
             position: relative;
         }
-        
+
         .gradient-border::before {
             content: '';
             position: absolute;
@@ -110,28 +111,28 @@
             mask-composite: exclude;
             pointer-events: none;
         }
-        
+
         .tech-icon {
             transition: all 0.3s ease;
         }
-        
+
         .tech-icon:hover {
             transform: translateY(-5px);
             filter: drop-shadow(0 0 8px currentColor);
         }
-        
+
         .project-card {
             transition: all 0.3s ease;
         }
-        
+
         .project-card:hover {
             transform: translateY(-5px);
         }
-        
+
         .nav-link {
             position: relative;
         }
-        
+
         .nav-link::after {
             content: '';
             position: absolute;
@@ -142,11 +143,11 @@
             background: linear-gradient(90deg, #FF10F0, #00F0FF);
             transition: width 0.3s ease;
         }
-        
+
         .nav-link:hover::after {
             width: 100%;
         }
-        
+
         .blob {
             position: absolute;
             filter: blur(60px);
@@ -154,7 +155,7 @@
             z-index: -1;
             border-radius: 50%;
         }
-        
+
         .blob-1 {
             background: #FF10F0;
             width: 300px;
@@ -162,7 +163,7 @@
             top: 10%;
             left: 10%;
         }
-        
+
         .blob-2 {
             background: #00F0FF;
             width: 400px;
@@ -233,15 +234,19 @@
             0% {
                 transform: translate(0, 0) rotate(0deg);
             }
+
             25% {
                 transform: translate(50vw, 20vh) rotate(90deg);
             }
+
             50% {
                 transform: translate(30vw, 60vh) rotate(180deg);
             }
+
             75% {
                 transform: translate(70vw, 40vh) rotate(270deg);
             }
+
             100% {
                 transform: translate(10vw, 80vh) rotate(360deg);
             }
@@ -256,15 +261,20 @@
         }
 
         @keyframes bounce {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0) translateX(0);
             }
+
             25% {
                 transform: translateY(-50px) translateX(20px);
             }
+
             50% {
                 transform: translateY(0) translateX(40px);
             }
+
             75% {
                 transform: translateY(-30px) translateX(60px);
             }
@@ -319,13 +329,14 @@
         }
     </style>
 </head>
+
 <body>
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
-    
+
     <!-- Floating Icons Background (React Component) -->
     <div id="floating-icons-root"></div>
-    
+
     <!-- Language Toggle Button -->
     <div class="language-toggle hover " id="languageToggle">
         <i class="fas fa-language"></i>
@@ -340,70 +351,85 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Navigation -->
     <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
         <div class="text-2xl font-bold gradient-text">Caique Oliveira</div>
         <div class="hidden md:flex space-x-8">
             <a href="#about" class="nav-link text-white hover:text-secondary" data-pt="Sobre" data-en="About">Sobre</a>
-            <a href="#skills" class="nav-link text-white hover:text-accent" data-pt="Habilidades" data-en="Skills">Habilidades</a>
-            <a href="#contact" class="nav-link text-white hover:text-accent" data-pt="Contato" data-en="Contact">Contato</a>
+            <a href="#skills" class="nav-link text-white hover:text-accent" data-pt="Habilidades"
+                data-en="Skills">Habilidades</a>
+            <a href="#contact" class="nav-link text-white hover:text-accent" data-pt="Contato"
+                data-en="Contact">Contato</a>
         </div>
         <button class="md:hidden text-white">
             <i class="fas fa-bars text-2xl"></i>
         </button>
     </nav>
-    
+
     <!-- Hero Section -->
     <section class="container mx-auto px-6 py-20 md:py-32 flex flex-col md:flex-row items-center">
         <div class="md:w-1/2 mb-12 md:mb-0">
             <h1 class="text-4xl md:text-6xl font-bold mb-4">
-                <span data-pt="Olá, eu sou" data-en="Hi, I'm">Olá, eu sou</span> <span class="gradient-text">Caique Oliveira</span>
+                <span data-pt="Olá, eu sou" data-en="Hi, I'm">Olá, eu sou</span> <span class="gradient-text">Caique
+                    Oliveira</span>
             </h1>
-            <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-300" data-pt="Desenvolvedor Full Stack" data-en="Full Stack Developer">
+            <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-300" data-pt="Desenvolvedor Full Stack"
+                data-en="Full Stack Developer">
                 Desenvolvedor Full Stack
             </h2>
-            <p class="text-lg text-gray-400 mb-8 max-w-lg" data-pt="Especializado em construir aplicações web modernas e escaláveis com tecnologias como Node.js, React, Tailwind, TypeScript e outros." 
-               data-en="Specialized in building modern and scalable web applications with technologies like Node.js, React, Tailwind, TypeScript and others.">
-                Especializado em construir aplicações web modernas e escaláveis com tecnologias como Node.js, React, Tailwind, TypeScript e outros.
+            <p class="text-lg text-gray-400 mb-8 max-w-lg"
+                data-pt="Especializado em construir aplicações web modernas e escaláveis com tecnologias como Node.js, React, Tailwind, TypeScript e outros."
+                data-en="Specialized in building modern and scalable web applications with technologies like Node.js, React, Tailwind, TypeScript and others.">
+                Especializado em construir aplicações web modernas e escaláveis com tecnologias como Node.js, React,
+                Tailwind, TypeScript e outros.
             </p>
             <div class="flex space-x-4">
-                <a href="#contact" class="px-6 py-3 bg-gradient-to-r from-secondary to-accent text-white rounded-lg font-medium hover:opacity-90 transition" data-pt="Contate-me" data-en="Contact Me">
+                <a href="#contact"
+                    class="px-6 py-3 bg-gradient-to-r from-secondary to-accent text-white rounded-lg font-medium hover:opacity-90 transition"
+                    data-pt="Contate-me" data-en="Contact Me">
                     Contate-me
                 </a>
             </div>
         </div>
         <div class="md:w-1/2 flex justify-center">
             <div class="relative w-64 h-64 md:w-80 md:h-80 gradient-border rounded-lg overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
-                     alt="Caique Oliveira" 
-                     class="w-full h-full object-cover">
+                <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                    alt="Caique Oliveira" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
             </div>
         </div>
     </section>
-    
+
     <!-- About Section -->
     <section id="about" class="container mx-auto px-6 py-20">
         <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
             <span class="gradient-text" data-pt="Sobre Mim" data-en="About Me">Sobre Mim</span>
         </h2>
         <div class="max-w-4xl mx-auto bg-gray-900 rounded-xl p-8 gradient-border">
-            <p class="text-lg text-gray-300 mb-6" data-pt="Sou um desenvolvedor Full Stack apaixonado por criar soluções tecnológicas inovadoras e eficientes. Com experiência em diversas tecnologias modernas, meu objetivo é entregar produtos de alta qualidade que resolvam problemas reais." 
-               data-en="I'm a passionate Full Stack Developer dedicated to creating innovative and efficient technological solutions. With experience in various modern technologies, my goal is to deliver high-quality products that solve real problems.">
-                Sou um desenvolvedor Full Stack apaixonado por criar soluções tecnológicas inovadoras e eficientes. Com experiência em diversas tecnologias modernas, meu objetivo é entregar produtos de alta qualidade que resolvam problemas reais.
+            <p class="text-lg text-gray-300 mb-6"
+                data-pt="Sou um desenvolvedor Full Stack apaixonado por criar soluções tecnológicas inovadoras e eficientes. Com experiência em diversas tecnologias modernas, meu objetivo é entregar produtos de alta qualidade que resolvam problemas reais."
+                data-en="I'm a passionate Full Stack Developer dedicated to creating innovative and efficient technological solutions. With experience in various modern technologies, my goal is to deliver high-quality products that solve real problems.">
+                Sou um desenvolvedor Full Stack apaixonado por criar soluções tecnológicas inovadoras e eficientes. Com
+                experiência em diversas tecnologias modernas, meu objetivo é entregar produtos de alta qualidade que
+                resolvam problemas reais.
             </p>
-            <p class="text-lg text-gray-300 mb-6" data-pt="Minha jornada na programação começou em 2020, e desde então tenho me dedicado a aprender e dominar as melhores práticas de desenvolvimento. Acredito na combinação de código limpo, arquitetura sólida e experiência do usuário excepcional." 
-               data-en="My programming journey started in 2020, and since then I've been dedicated to learning and mastering development best practices. I believe in the combination of clean code, solid architecture, and exceptional user experience.">
-                Minha jornada na programação começou em 2020, e desde então tenho me dedicado a aprender e dominar as melhores práticas de desenvolvimento. Acredito na combinação de código limpo, arquitetura sólida e experiência do usuário excepcional.
+            <p class="text-lg text-gray-300 mb-6"
+                data-pt="Minha jornada na programação começou em 2020, e desde então tenho me dedicado a aprender e dominar as melhores práticas de desenvolvimento. Acredito na combinação de código limpo, arquitetura sólida e experiência do usuário excepcional."
+                data-en="My programming journey started in 2020, and since then I've been dedicated to learning and mastering development best practices. I believe in the combination of clean code, solid architecture, and exceptional user experience.">
+                Minha jornada na programação começou em 2020, e desde então tenho me dedicado a aprender e dominar as
+                melhores práticas de desenvolvimento. Acredito na combinação de código limpo, arquitetura sólida e
+                experiência do usuário excepcional.
             </p>
-            <p class="text-lg text-gray-300" data-pt="Quando não estou codando, você pode me encontrar explorando novas tecnologias, contribuindo para projetos open-source ou aproveitando um bom café enquanto estudo novas tendências do mercado." 
-               data-en="When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or enjoying a good coffee while studying new market trends.">
-                Quando não estou codando, você pode me encontrar explorando novas tecnologias, contribuindo para projetos open-source ou aproveitando um bom café enquanto estudo novas tendências do mercado.
+            <p class="text-lg text-gray-300"
+                data-pt="Quando não estou codando, você pode me encontrar explorando novas tecnologias, contribuindo para projetos open-source ou aproveitando um bom café enquanto estudo novas tendências do mercado."
+                data-en="When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or enjoying a good coffee while studying new market trends.">
+                Quando não estou codando, você pode me encontrar explorando novas tecnologias, contribuindo para
+                projetos open-source ou aproveitando um bom café enquanto estudo novas tendências do mercado.
             </p>
         </div>
     </section>
-    
+
     <!-- Skills Section -->
     <section id="skills" class="container mx-auto px-6 py-20">
         <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
@@ -438,7 +464,7 @@
                     </li>
                 </ul>
             </div>
-            
+
             <!-- Backend -->
             <div class="bg-gray-900 rounded-xl p-6 gradient-border">
                 <h3 class="text-xl font-semibold mb-4 text-accent flex items-center">
@@ -467,11 +493,12 @@
                     </li>
                 </ul>
             </div>
-            
+
             <!-- Cloud & DevOps -->
             <div class="bg-gray-900 rounded-xl p-6 gradient-border">
                 <h3 class="text-xl font-semibold mb-4 text-secondary flex items-center">
-                    <i class="fas fa-cloud mr-2"></i> <span data-pt="Cloud & DevOps" data-en="Cloud & DevOps">Cloud & DevOps</span>
+                    <i class="fas fa-cloud mr-2"></i> <span data-pt="Cloud & DevOps" data-en="Cloud & DevOps">Cloud &
+                        DevOps</span>
                 </h3>
                 <ul class="space-y-2">
                     <li class="flex items-center">
@@ -491,7 +518,7 @@
         </div>
     </section>
 
-<!-- <section id="erp" class="container mx-auto px-6 py-20">
+    <!-- <section id="erp" class="container mx-auto px-6 py-20">
     <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
         <span class="gradient-text" data-pt="Meu ERP" data-en="My ERP">Meu ERP</span>
     </h2>
@@ -520,7 +547,7 @@
         </div>
     </div>
 </section> -->
-    
+
     <!-- Contact Section -->
     <section id="contact" class="container mx-auto px-6 py-20">
         <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
@@ -529,41 +556,47 @@
         <div class="max-w-4xl mx-auto bg-gray-900 rounded-xl p-8 gradient-border">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                    <h3 class="text-xl font-semibold mb-4 text-secondary" data-pt="Informações de Contato" data-en="Contact Information">Informações de Contato</h3>
-                    <p class="text-gray-400 mb-6" data-pt="Estou disponível para freelance, oportunidades de trabalho e colaborações. Sinta-se à vontade para entrar em contato!" 
-                       data-en="I'm available for freelance, job opportunities and collaborations. Feel free to get in touch!">
-                        Estou disponível para freelance, oportunidades de trabalho e colaborações. Sinta-se à vontade para entrar em contato!
+                    <h3 class="text-xl font-semibold mb-4 text-secondary" data-pt="Informações de Contato"
+                        data-en="Contact Information">Informações de Contato</h3>
+                    <p class="text-gray-400 mb-6"
+                        data-pt="Estou disponível para freelance, oportunidades de trabalho e colaborações. Sinta-se à vontade para entrar em contato!"
+                        data-en="I'm available for freelance, job opportunities and collaborations. Feel free to get in touch!">
+                        Estou disponível para freelance, oportunidades de trabalho e colaborações. Sinta-se à vontade
+                        para entrar em contato!
                     </p>
                     <ul class="space-y-4">
-                <li class="flex items-center">
-                    <i class="fas fa-envelope text-accent mr-4 text-xl"></i>
-                    <a href="mailto:dev.caiquealves@gmail.com" class="hover:underline">dev.caiquealves@gmail.com</a>
-                </li>
-                <li class="flex items-center">
-                    <i class="fas fa-phone text-secondary mr-4 text-xl"></i>
-                    <a href="https://wa.me/5511998755337?text=Olá!%20Vim%20pelo%20seu%20portfólio." target="_blank" class="hover:underline">
-                        +55 (11) 99875-5337
-                    </a>
-                </li>
-                <li class="flex items-center">
-                    <i class="fab fa-linkedin text-accent mr-4 text-xl"></i>
-                    <a href="https://www.linkedin.com/in/caique-oliveira-br" target="_blank" class="hover:underline">
-                        www.linkedin.com/in/caique-oliveira-br
-                    </a>
-                </li>
-                <li class="flex items-center">
-                    <i class="fab fa-github text-secondary mr-4 text-xl"></i>
-                    <a href="https://github.com/dev-caiquealves" target="_blank" class="hover:underline">
-                        github.com/dev-caiquealves
-                    </a>
-                </li>
-                <li class="flex items-center">
-                    <i class="fab fa-instagram text-accent mr-4 text-xl"></i>
-                    <a href="https://www.instagram.com/caiquealveso_" target="_blank" class="hover:underline">
-                        @caiquealveso_
-                    </a>
-                </li>
-            </ul>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-accent mr-4 text-xl"></i>
+                            <a href="mailto:dev.caiquealves@gmail.com"
+                                class="hover:underline">dev.caiquealves@gmail.com</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone text-secondary mr-4 text-xl"></i>
+                            <a href="https://wa.me/5511998755337?text=Olá!%20Vim%20pelo%20seu%20portfólio."
+                                target="_blank" class="hover:underline">
+                                +55 (11) 99875-5337
+                            </a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-linkedin text-accent mr-4 text-xl"></i>
+                            <a href="https://www.linkedin.com/in/caique-oliveira-br" target="_blank"
+                                class="hover:underline">
+                                www.linkedin.com/in/caique-oliveira-br
+                            </a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-github text-secondary mr-4 text-xl"></i>
+                            <a href="https://github.com/dev-caiquealves" target="_blank" class="hover:underline">
+                                github.com/dev-caiquealves
+                            </a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-instagram text-accent mr-4 text-xl"></i>
+                            <a href="https://www.instagram.com/caiquealveso_" target="_blank" class="hover:underline">
+                                @caiquealveso_
+                            </a>
+                        </li>
+                    </ul>
 
                 </div>
                 <div>
@@ -588,7 +621,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Footer -->
     <footer class="bg-gray-900 py-8">
         <div class="container mx-auto px-6">
@@ -596,14 +629,24 @@
                 <div class="text-2xl font-bold gradient-text mb-4 md:mb-0">Caique Oliveira</div>
             </div>
             <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
-                <p data-pt="&copy; 2025 Caique Oliveira. Todos os direitos reservados." 
-                   data-en="&copy; 2025 Caique Oliveira. All rights reserved.">
+                <p data-pt="&copy; 2025 Caique Oliveira. Todos os direitos reservados."
+                    data-en="&copy; 2025 Caique Oliveira. All rights reserved.">
                     &copy; 2025 Caique Oliveira. Todos os direitos reservados.
                 </p>
             </div>
         </div>
     </footer>
-    
+
+    <div class="fixed bottom-6 left-6 z-50">
+        <a href="https://wa.me/5511998755337" target="_blank" rel="noopener noreferrer"
+            class="flex items-center bg-green-500 text-white shadow-md rounded-full px-4 py-2 space-x-2 transition-all duration-300 ease-in-out hover:scale-105 hover:bg-green-400"
+            aria-label="Converse no WhatsApp">
+            <i class="fab fa-whatsapp text-xl"></i>
+            <span class="text-sm font-medium">WhatsApp</span>
+        </a>
+    </div>
+
+
     <!-- React Scripts -->
     <script type="text/babel">
         // Floating Tech Icons Component
@@ -622,7 +665,7 @@
                 { icon: 'fas fa-code', color: '#007ACC', size: 'text-3xl', animation: 'random-move' },
                 { icon: 'fas fa-server', color: '#FF10F0', size: 'text-4xl', animation: 'move-x' }
             ];
-            
+
             // Generate random positions for icons
             const getRandomPosition = () => ({
                 top: `${Math.random() * 100}%`,
@@ -630,21 +673,21 @@
                 animationDuration: `${15 + Math.random() * 20}s`,
                 animationDelay: `${Math.random() * 5}s`
             });
-            
+
             // Generate random movement patterns
             const getRandomMovement = () => {
                 const patterns = ['random-move', 'move-x', 'move-y', 'move-diagonal', 'bounce'];
                 return patterns[Math.floor(Math.random() * patterns.length)];
             };
-            
+
             return (
                 <div className="floating-icons-container">
                     {techIcons.map((tech, index) => {
                         const position = getRandomPosition();
                         const movement = getRandomMovement();
-                        
+
                         return (
-                            <i 
+                            <i
                                 key={index}
                                 className={`${tech.icon} ${tech.size} animated-tech-icon ${movement}`}
                                 style={{
@@ -661,30 +704,30 @@
                 </div>
             );
         };
-        
+
         // Render the React component
         ReactDOM.render(<FloatingTechIcons />, document.getElementById('floating-icons-root'));
     </script>
-    
+
     <!-- Original Scripts -->
     <script>
         // Language toggle functionality
         const languageToggle = document.getElementById('languageToggle');
         const languageMenu = document.getElementById('languageMenu');
         let currentLanguage = 'pt'; // Default language is Portuguese
-        
+
         // Function to toggle language menu
         function toggleLanguageMenu(e) {
             e.stopPropagation(); // Prevent event from bubbling up
             languageMenu.classList.toggle('active');
         }
-        
+
         // Function to set language
         function setLanguage(lang) {
             currentLanguage = lang;
             updateLanguage();
             languageMenu.classList.remove('active');
-            
+
             // Update active language indicator
             document.querySelectorAll('.language-option').forEach(option => {
                 if (option.dataset.lang === lang) {
@@ -694,7 +737,7 @@
                 }
             });
         }
-        
+
         // Function to update all elements with data attributes
         function updateLanguage() {
             document.querySelectorAll('[data-pt], [data-en]').forEach(element => {
@@ -706,17 +749,17 @@
                     element.setAttribute('placeholder', currentLanguage === 'pt' ? element.dataset.pt : element.dataset.en);
                 }
             });
-            
+
             // Update HTML lang attribute
             document.documentElement.lang = currentLanguage === 'pt' ? 'pt-BR' : 'en-US';
-            
+
             // Update toggle button title
             languageToggle.title = currentLanguage === 'pt' ? 'Switch to English' : 'Mudar para Português';
         }
-        
+
         // Initialize language toggle button
         languageToggle.addEventListener('click', toggleLanguageMenu);
-        
+
         // Initialize language options
         document.querySelectorAll('.language-option').forEach(option => {
             option.addEventListener('click', (e) => {
@@ -724,35 +767,35 @@
                 setLanguage(option.dataset.lang);
             });
         });
-        
+
         // Close language menu when clicking outside
         document.addEventListener('click', () => {
             languageMenu.classList.remove('active');
         });
-        
+
         // Prevent closing when clicking inside the menu
         languageMenu.addEventListener('click', (e) => {
             e.stopPropagation();
         });
-        
+
         // Initialize with Portuguese selected
         setLanguage('pt');
-        
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                
+
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
             });
         });
-        
+
         // Mobile menu toggle
         const mobileMenuButton = document.querySelector('.md\\:hidden');
         const mobileMenu = document.querySelector('.md\\:flex');
-        
+
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
             mobileMenu.classList.toggle('flex');
@@ -767,12 +810,12 @@
             mobileMenu.classList.toggle('space-y-4');
             mobileMenu.classList.toggle('space-x-8');
         });
-        
+
         // Animation on scroll
         const observerOptions = {
             threshold: 0.1
         };
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -780,9 +823,10 @@
                 }
             });
         }, observerOptions);
-        
+
         document.querySelectorAll('section').forEach(section => {
             observer.observe(section);
         });
     </script>
+
 </html>
